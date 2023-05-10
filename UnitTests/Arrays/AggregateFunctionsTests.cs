@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 using System;
 
-namespace JUST.UnitTests.Arrays
-{
+namespace JUST.UnitTests.Arrays;
+
     [TestFixture, Category("AggregateFunctions")]
     public class AggregateFunctionsTests
     {
@@ -189,4 +189,3 @@ namespace JUST.UnitTests.Arrays
             Assert.AreEqual("{\"max_at_path\":3}", result);
         }
     }
-}

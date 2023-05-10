@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 using System;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture, Category("EvaluationMode")]
     public class EvaluationModeTests
     {
@@ -16,4 +16,3 @@ namespace JUST.UnitTests
             Assert.AreEqual("{\"popup\":{\"menuitem\":[],\"submenuitem\":\"CloseSession()\"},\"id\":{\"file\":\"csv\"},\"value\":{\"Window\":\"popup\"}}", result);
         }
     }
-}

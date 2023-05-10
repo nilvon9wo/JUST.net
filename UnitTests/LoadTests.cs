@@ -3,8 +3,8 @@ using System;
 using System.Diagnostics;
 using System.IO;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture]
     public class LoadTests
     {
@@ -34,4 +34,3 @@ namespace JUST.UnitTests
             Assert.LessOrEqual(timeConsumed, TimeSpan.FromSeconds(5));
         }
     }
-}

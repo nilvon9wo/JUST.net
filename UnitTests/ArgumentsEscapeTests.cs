@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture, Category("EscapedChars")]
     public class ArgumentsEscapeTests
     {
@@ -107,7 +107,7 @@ namespace JUST.UnitTests
         public void OneArgumentFunctionWithEscapedChars()
         {
             const string input = "{ \"creditsDebits\": [{ \"ratingModifierValue\": null, \"name\": \"Qualifications\", \"id\": \"3d4f2273-edb3-4959-b232-e7386e8dca1e\", \"factorValue\": null, \"factorMin\": null, \"factorMax\": null, \"defaultValue\": null, \"code\": \"ECC002\" }, { \"ratingModifierValue\": \"Need this value\", \"name\": \"Loss Experience\", \"id\": \"af0324f3-6676-4faf-a9e9-c14f1eaa2fee\", \"factorValue\": null, \"factorMin\": null, \"factorMax\": null, \"defaultValue\": null, \"code\": \"ECC100\" }] }";
-            string transformer = "{ \"someNewNode\": \"#valueof($.creditsDebits[?/(@.code == 'ECC100'/)].ratingModifierValue)\" }";
+		const string transformer = "{ \"someNewNode\": \"#valueof($.creditsDebits[?/(@.code == 'ECC100'/)].ratingModifierValue)\" }";
 
             var context = new JUSTContext
             {
@@ -132,4 +132,3 @@ namespace JUST.UnitTests
             Assert.AreEqual("{\"result\":\"#arg1#notfunc(),,arg2.3.1#'arg2.3.3,5#\"}", result);
         }
     }
-}

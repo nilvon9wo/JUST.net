@@ -1,15 +1,15 @@
 ﻿using NUnit.Framework;
 using System;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture]
     public class StringFunctionsTests
     {
         [Test]
         public void FirstIndexOf()
         {
-            var transformer = "{ \"stringresult\": { \"firstindexofand\": \"#firstindexof(#valueof($.stringref),and)\" }}";
+		const string transformer = "{ \"stringresult\": { \"firstindexofand\": \"#firstindexof(#valueof($.stringref),and)\" }}";
 
             var result = new JsonTransformer().Transform(transformer, ExampleInputs.StringRef);
 
@@ -19,7 +19,7 @@ namespace JUST.UnitTests
         [Test]
         public void LastIndexOf()
         {
-            var transformer = "{ \"stringresult\": { \"lastindexofand\": \"#lastindexof(#valueof($.stringref),and)\" }}";
+		const string transformer = "{ \"stringresult\": { \"lastindexofand\": \"#lastindexof(#valueof($.stringref),and)\" }}";
 
             var result = new JsonTransformer().Transform(transformer, ExampleInputs.StringRef);
 
@@ -29,7 +29,7 @@ namespace JUST.UnitTests
         [Test]
         public void Substring()
         {
-            var transformer = "{ \"stringresult\": { \"substring\": \"#substring(#valueof($.stringref),8,10)\" }}";
+		const string transformer = "{ \"stringresult\": { \"substring\": \"#substring(#valueof($.stringref),8,10)\" }}";
 
             var result = new JsonTransformer().Transform(transformer, ExampleInputs.StringRef);
 
@@ -39,7 +39,7 @@ namespace JUST.UnitTests
         [Test]
         public void SubstringFallbackToDefault()
         {
-            var transformer = "{ \"stringresult\": { \"substring\": \"#substring(#valueof($.stringref),100,100)\" }}";
+		const string transformer = "{ \"stringresult\": { \"substring\": \"#substring(#valueof($.stringref),100,100)\" }}";
 
             var result = new JsonTransformer().Transform(transformer, ExampleInputs.StringRef);
 
@@ -49,7 +49,7 @@ namespace JUST.UnitTests
         [Test]
         public void SubstringStrictError()
         {
-            var transformer = "{ \"stringresult\": { \"substring\": \"#substring(#valueof($.stringref),100,100)\" }}";
+		const string transformer = "{ \"stringresult\": { \"substring\": \"#substring(#valueof($.stringref),100,100)\" }}";
 
             Assert.Throws<Exception>(() => new JsonTransformer(new JUSTContext { EvaluationMode = EvaluationMode.Strict }).Transform(transformer, ExampleInputs.StringRef));
         }
@@ -57,7 +57,7 @@ namespace JUST.UnitTests
         [Test]
         public void Concat()
         {
-            var transformer = "{ \"stringresult\": { \"concat\": \"#concat(#valueof($.menu.id.file),#valueof($.menu.value.Window))\" }}";
+		const string transformer = "{ \"stringresult\": { \"concat\": \"#concat(#valueof($.menu.id.file),#valueof($.menu.value.Window))\" }}";
 
             var result = new JsonTransformer().Transform(transformer, ExampleInputs.Menu);
 
@@ -67,7 +67,7 @@ namespace JUST.UnitTests
         [Test]
         public void Equals()
         {
-            var transformer = "{ \"stringresult\": { \"stringequals\": \"#stringequals(#valueof($.d[0]),one)\" }}";
+		const string transformer = "{ \"stringresult\": { \"stringequals\": \"#stringequals(#valueof($.d[0]),one)\" }}";
 
             var result = new JsonTransformer().Transform(transformer, ExampleInputs.StringsArray);
 
@@ -77,7 +77,7 @@ namespace JUST.UnitTests
         [Test]
         public void EqualsCaseSensitive()
         {
-            var transformer = "{ \"stringresult\": { \"stringequals\": \"#stringequals(#valueof($.d[0]),oNe)\" }}";
+		const string transformer = "{ \"stringresult\": { \"stringequals\": \"#stringequals(#valueof($.d[0]),oNe)\" }}";
 
             var context = new JUSTContext() { EvaluationMode = EvaluationMode.Strict };
             var result = new JsonTransformer(context).Transform(transformer, ExampleInputs.StringsArray);
@@ -88,7 +88,7 @@ namespace JUST.UnitTests
         [Test]
         public void EqualsOnNull()
         {
-            var transformer = "{ \"stringresult\": { \"stringequals\": \"#stringequals(#valueof($.not_there),one)\" }}";
+		const string transformer = "{ \"stringresult\": { \"stringequals\": \"#stringequals(#valueof($.not_there),one)\" }}";
 
             var result = new JsonTransformer().Transform(transformer, ExampleInputs.StringsArray);
 
@@ -98,7 +98,7 @@ namespace JUST.UnitTests
         [Test]
         public void Contains()
         {
-            var transformer = "{ \"stringresult\": { \"stringcontains\": \"#stringcontains(#valueof($.d[0]),n)\" }}";
+		const string transformer = "{ \"stringresult\": { \"stringcontains\": \"#stringcontains(#valueof($.d[0]),n)\" }}";
 
             var result = new JsonTransformer().Transform(transformer, ExampleInputs.StringsArray);
 
@@ -108,7 +108,7 @@ namespace JUST.UnitTests
         [Test]
         public void ContainsCaseSensitive()
         {
-            var transformer = "{ \"stringresult\": { \"stringcontains\": \"#stringcontains(#valueof($.d[0]),N)\" }}";
+		const string transformer = "{ \"stringresult\": { \"stringcontains\": \"#stringcontains(#valueof($.d[0]),N)\" }}";
 
             var context = new JUSTContext() { EvaluationMode = EvaluationMode.Strict };
             var result = new JsonTransformer(context).Transform(transformer, ExampleInputs.StringsArray);
@@ -119,7 +119,7 @@ namespace JUST.UnitTests
         [Test]
         public void ContainsOnNull()
         {
-            var transformer = "{ \"stringresult\": { \"stringcontains\": \"#stringcontains(#valueof($.not_there),n)\" }}";
+		const string transformer = "{ \"stringresult\": { \"stringcontains\": \"#stringcontains(#valueof($.not_there),n)\" }}";
 
             var result = new JsonTransformer().Transform(transformer, ExampleInputs.StringsArray);
 
@@ -129,8 +129,8 @@ namespace JUST.UnitTests
         [Test]
         public void StringEmpty()
         {
-            var input = "{ \"empty\": \"\", \"not_empty\": \"not empty\" }";
-            var transformer = "{ \"test_empty\": \"#ifcondition(#valueof($.empty),#stringempty(),is empty,not empty)\", \"test_not_empty\": \"#ifcondition(#valueof($.not_empty),#stringempty(),empty,is not empty)\" }";
+		const string input = "{ \"empty\": \"\", \"not_empty\": \"not empty\" }";
+		const string transformer = "{ \"test_empty\": \"#ifcondition(#valueof($.empty),#stringempty(),is empty,not empty)\", \"test_not_empty\": \"#ifcondition(#valueof($.not_empty),#stringempty(),empty,is not empty)\" }";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.Strict
@@ -140,4 +140,3 @@ namespace JUST.UnitTests
             Assert.AreEqual("{\"test_empty\":\"is empty\",\"test_not_empty\":\"is not empty\"}", result);
         }
     }
-}

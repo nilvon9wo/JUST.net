@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 
-namespace JUST.UnitTests.Arrays
-{
+namespace JUST.UnitTests.Arrays;
+
     [TestFixture, Category("ArrayInput")]
     public class ConcatenationTests
     {
@@ -28,7 +28,7 @@ namespace JUST.UnitTests.Arrays
         [Test]
         public void ConcatMultipleArrays()
         {
-            var input = "{ \"value1\": [{ \"prop1\": \"prop1\" },{ \"prop2\": null },{ \"prop3\": \"prop3\" }], \"value2\": [{ \"prop4\": \"prop4\" },{ \"prop5\": null }], \"value3\": [{ \"prop1\": \"prop1\" },{ \"prop2\": null },{ \"prop3\": \"prop3\" }] }";
+		const string input = "{ \"value1\": [{ \"prop1\": \"prop1\" },{ \"prop2\": null },{ \"prop3\": \"prop3\" }], \"value2\": [{ \"prop4\": \"prop4\" },{ \"prop5\": null }], \"value3\": [{ \"prop1\": \"prop1\" },{ \"prop2\": null },{ \"prop3\": \"prop3\" }] }";
             const string transformer = "{ \"result\": \"#concat(#concat(#valueof($.value1), #valueof($.value2)), #valueof($.value3))\" }";
 
             var result = new JsonTransformer(new JUSTContext { EvaluationMode = EvaluationMode.Strict }).Transform(transformer, input);
@@ -59,7 +59,7 @@ namespace JUST.UnitTests.Arrays
         [Test]
         public void XconcatMultipleArrays()
         {
-            var input = "{ \"value1\": [{ \"prop1\": \"prop1\" },{ \"prop2\": null },{ \"prop3\": \"prop3\" }], \"value2\": [{ \"prop4\": \"prop4\" },{ \"prop5\": null }], \"value3\": [{ \"prop1\": \"prop1\" },{ \"prop2\": null },{ \"prop3\": \"prop3\" }] }";
+		const string input = "{ \"value1\": [{ \"prop1\": \"prop1\" },{ \"prop2\": null },{ \"prop3\": \"prop3\" }], \"value2\": [{ \"prop4\": \"prop4\" },{ \"prop5\": null }], \"value3\": [{ \"prop1\": \"prop1\" },{ \"prop2\": null },{ \"prop3\": \"prop3\" }] }";
             const string transformer = "{ \"result\": \"#xconcat(#valueof($.value1), #valueof($.value2), #valueof($.value3))\" }";
 
             var result = new JsonTransformer(new JUSTContext { EvaluationMode = EvaluationMode.Strict }).Transform(transformer, input);
@@ -67,4 +67,3 @@ namespace JUST.UnitTests.Arrays
             Assert.AreEqual("{\"result\":[{\"prop1\":\"prop1\"},{\"prop2\":null},{\"prop3\":\"prop3\"},{\"prop4\":\"prop4\"},{\"prop5\":null},{\"prop1\":\"prop1\"},{\"prop2\":null},{\"prop3\":\"prop3\"}]}", result);
         }
     }
-}

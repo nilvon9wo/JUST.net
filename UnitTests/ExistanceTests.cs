@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture]
     public class ExistanceTests
     {
@@ -71,4 +71,3 @@ namespace JUST.UnitTests
             Assert.AreEqual("{\"ArrayEmpty\":false,\"ArrayNotEmpty\":true}", result);
         }
     }
-}

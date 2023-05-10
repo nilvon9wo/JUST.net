@@ -1,7 +1,7 @@
 using NUnit.Framework;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture, Category("ValueOf")]
     public class ValueOfTests
     {
@@ -121,10 +121,10 @@ namespace JUST.UnitTests
             var result = new JsonTransformer().Transform(transformer, input);
 
             Assert.AreEqual("{\"result\":[\"elem1\",\"elem2\"]}", result);
-		}
+	}
         
-		[Test]
-		public void DoublePrecision()
+	[Test]
+	public void DoublePrecision()
         {
             const string input = "{ \"Latitude\": 38.978378, \"Longitude\": -122.032861 }";
             const string transformer = "{ \"LatitudeInDecimalDegrees\": \"#valueof($.Latitude)\", \"LongitudeInDecimalDegrees\": \"#valueof($.Longitude)\" }";
@@ -134,4 +134,3 @@ namespace JUST.UnitTests
             Assert.AreEqual("{\"LatitudeInDecimalDegrees\":38.978378,\"LongitudeInDecimalDegrees\":-122.032861}", result);
         }
     }
-}

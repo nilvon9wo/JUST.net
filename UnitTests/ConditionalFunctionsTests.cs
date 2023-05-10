@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 using System;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture, Category("ConditionalFunctions")]
     public class ConditionalFunctionsTests
     {
@@ -141,8 +141,8 @@ namespace JUST.UnitTests
         [Test, Category("IfGroup")]
         public void ConditionalGroupSingleValue()
         {
-            var input = "{ \"arr\": [\"1234\", \"5678\" ]}";
-            var transformer = "{\"result\": [ \"#ifgroup(False,#valueof($.arr[0]))\", \"#ifgroup(True,#valueof($.arr[1]))\" ] }";
+		const string input = "{ \"arr\": [\"1234\", \"5678\" ]}";
+		const string transformer = "{\"result\": [ \"#ifgroup(False,#valueof($.arr[0]))\", \"#ifgroup(True,#valueof($.arr[1]))\" ] }";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.Strict
@@ -196,8 +196,8 @@ namespace JUST.UnitTests
         [Test, Category("IfGroup"), Category("Loops")]
         public void ConditionalGroupTrueWithLoopInside()
         {
-            var input = "{ \"errors\": { \"account\": [ \"error1\", \"error2\" ] } }";
-            var transformer = "{ \"Result\": { \"#ifgroup(#exists($.errors.account))\": { \"#loop($.errors.account)\": { \"ValidationMessage\": \"#currentvalueatpath($)\" } } }, \"Other\": \"property\" }";
+		const string input = "{ \"errors\": { \"account\": [ \"error1\", \"error2\" ] } }";
+		const string transformer = "{ \"Result\": { \"#ifgroup(#exists($.errors.account))\": { \"#loop($.errors.account)\": { \"ValidationMessage\": \"#currentvalueatpath($)\" } } }, \"Other\": \"property\" }";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.FallbackToDefault
@@ -210,8 +210,8 @@ namespace JUST.UnitTests
         [Test, Category("IfGroup"), Category("Loops")]
         public void ConditionalGroupFalseWithLoopInside()
         {
-            var input = "{ \"errors\": { \"account\": [ ] } }";
-            var transformer = "{ \"Result\": { \"#ifgroup(#exists($.errors.account))\": { \"#loop($.errors.account)\": { \"ValidationMessage\": \"#currentvalueatpath($)\" } } }, \"Other\": \"property\" }";
+		const string input = "{ \"errors\": { \"account\": [ ] } }";
+		const string transformer = "{ \"Result\": { \"#ifgroup(#exists($.errors.account))\": { \"#loop($.errors.account)\": { \"ValidationMessage\": \"#currentvalueatpath($)\" } } }, \"Other\": \"property\" }";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.FallbackToDefault
@@ -224,8 +224,8 @@ namespace JUST.UnitTests
         [Test, Category("IfGroup"), Category("Loops")]
         public void ConditionalGroupNonExistingWithLoopInside()
         {
-            var input = "{ }";
-            var transformer = "{ \"Result\": { \"#ifgroup(#exists($.errors.account))\": { \"#loop($.errors.account)\": { \"ValidationMessage\": \"#currentvalueatpath($)\" } } }, \"Other\": \"property\" }";
+		const string input = "{ }";
+		const string transformer = "{ \"Result\": { \"#ifgroup(#exists($.errors.account))\": { \"#loop($.errors.account)\": { \"ValidationMessage\": \"#currentvalueatpath($)\" } } }, \"Other\": \"property\" }";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.FallbackToDefault
@@ -246,4 +246,3 @@ namespace JUST.UnitTests
             Assert.AreEqual("{\"result\":[]}", result);
         }
     }
-}

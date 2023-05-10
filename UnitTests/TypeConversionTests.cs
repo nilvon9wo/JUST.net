@@ -1,8 +1,8 @@
 ﻿using System.Globalization;
 using NUnit.Framework;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture, Category("Type")]
     public class TypeConversionTests
     {
@@ -72,4 +72,3 @@ namespace JUST.UnitTests
             Assert.AreEqual($"{{\"result\":{expectedResult}}}", result);
         }
     }
-}

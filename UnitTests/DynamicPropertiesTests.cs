@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture]
     public class DynamicPropertiesTests
     {
@@ -47,7 +47,7 @@ namespace JUST.UnitTests
         public void TypedValuesInsideEval()
         {
             const string input = "{ \"a\": [{ \"name\": \"prop1\", \"val\": 1 }, { \"name\": \"prop2\", \"val\": 2 }] }";
-            string transformer = "{ \"a\": { \"#loop($.a)\": { \"#eval(#currentvalueatpath($.name))\": \"#currentvalueatpath($.val)\" } } }";
+		const string transformer = "{ \"a\": { \"#loop($.a)\": { \"#eval(#currentvalueatpath($.name))\": \"#currentvalueatpath($.val)\" } } }";
 
             var context = new JUSTContext
             {
@@ -61,8 +61,8 @@ namespace JUST.UnitTests
         [Test]
         public void EvalWithObjectInside()
         {
-            var input = "{ \"sections\": [ { \"id\": \"first\", \"label\": \"First section\" }, { \"id\": \"second\", \"label\": \"Second section\" } ] }";
-            var transformer = "{ \"areas\": { \"#loop($.sections)\": { \"#eval(#currentvalueatpath($.id))\": { \"description\": \"#currentvalueatpath($.label)\" } } } }";
+		const string input = "{ \"sections\": [ { \"id\": \"first\", \"label\": \"First section\" }, { \"id\": \"second\", \"label\": \"Second section\" } ] }";
+		const string transformer = "{ \"areas\": { \"#loop($.sections)\": { \"#eval(#currentvalueatpath($.id))\": { \"description\": \"#currentvalueatpath($.label)\" } } } }";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.Strict
@@ -72,4 +72,3 @@ namespace JUST.UnitTests
             Assert.AreEqual("{\"areas\":[{\"first\":{\"description\":\"First section\"}},{\"second\":{\"description\":\"Second section\"}}]}", result);
         }
     }
-}

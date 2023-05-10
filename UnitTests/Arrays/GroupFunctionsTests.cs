@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 
-namespace JUST.UnitTests.Arrays
-{
+namespace JUST.UnitTests.Arrays;
+
     [TestFixture]
     public class GroupFunctionsTests
     {
@@ -39,4 +39,3 @@ namespace JUST.UnitTests.Arrays
             Assert.AreEqual("{\"Result\":[{\"type:a\":\"air\",\"company\":\"Boeing\",\"all\":[{\"name\":\"airplane\"},{\"name\":\"Chopper\"}]},{\"type:a\":\"air\",\"company\":\"Concorde\",\"all\":[{\"name\":\"airplane\"}]},{\"type:a\":\"land\",\"company\":\"GM\",\"all\":[{\"name\":\"car\"},{\"name\":\"truck\"}]},{\"type:a\":\"sea\",\"company\":\"Viking\",\"all\":[{\"name\":\"ship\"}]}]}", result);
         }
     }
-}
