@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 using System;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture, Category("CustomFunctions")]
     public class RegisteredCustomFunctionsTests
     {
@@ -168,4 +168,3 @@ namespace JUST.UnitTests
             Assert.AreEqual($"Error while calling function : #{unregisteredFunction}(#valueof($.non-existent)) - Invalid function: #{unregisteredFunction}", result.Message);
         }
     }
-}

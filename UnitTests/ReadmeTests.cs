@@ -2,8 +2,8 @@
 using NUnit.Framework;
 using System.Globalization;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture, Category("ReadMe")]
     public class ReadmeTests
     {
@@ -191,8 +191,8 @@ namespace JUST.UnitTests
         [Test]
         public void ApplyOver()
         {
-            var input = "{\"d\": [ \"one\", \"two\", \"three\" ], \"values\": [ \"z\", \"c\", \"n\" ]}";
-            var transformer = "{ \"simple_function\": \"#applyover({ 'condition': { '#loop($.values)': { 'test': '#ifcondition(#stringcontains(#valueof($.d[0]),#currentvalue()),True,yes,no)' } } }, '#exists($.condition[?(@.test=='yes')])')\", " +
+		const string input = "{\"d\": [ \"one\", \"two\", \"three\" ], \"values\": [ \"z\", \"c\", \"n\" ]}";
+		const string transformer = "{ \"simple_function\": \"#applyover({ 'condition': { '#loop($.values)': { 'test': '#ifcondition(#stringcontains(#valueof($.d[0]),#currentvalue()),True,yes,no)' } } }, '#exists($.condition[?(@.test=='yes')])')\", " +
                                 "\"object\": \"#applyover(#xconcat({ 'temp': { '#loop($.values)': { 'index': '#currentindex()', #constant_comma(), 'value': '#currentvalue()' } } }), { 'first_element': '#valueof($.temp[0])' })\", " +
                                 "\"array\": \"#applyover(#xconcat({ '#loop($.d)': { 'index': '#currentindex()', #constant_comma(), 'value': '#currentvalue()' } }), { 'last_element': '#valueof($[2])' })\" }";
             var context = new JUSTContext
@@ -207,8 +207,8 @@ namespace JUST.UnitTests
         [Test]
         public void JmesPath()
         {
-            var input = "{\"locations\": [{\"name\": \"Seattle\", \"state\": \"WA\"},{\"name\": \"New York\", \"state\": \"NY\"},{\"name\": \"Bellevue\", \"state\": \"WA\"},{\"name\": \"Olympia\", \"state\": \"WA\"}]}";
-            var transformer = "{ \"result\": \"#valueof(locations[?state == 'WA'].name | sort(@) | {WashingtonCities: join(', ', @)})\" }";
+		const string input = "{\"locations\": [{\"name\": \"Seattle\", \"state\": \"WA\"},{\"name\": \"New York\", \"state\": \"NY\"},{\"name\": \"Bellevue\", \"state\": \"WA\"},{\"name\": \"Olympia\", \"state\": \"WA\"}]}";
+		const string transformer = "{ \"result\": \"#valueof(locations[?state == 'WA'].name | sort(@) | {WashingtonCities: join(', ', @)})\" }";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.Strict
@@ -221,8 +221,8 @@ namespace JUST.UnitTests
         [Test]
         public void Escape()
         {
-            var input = "{ \"arg\": \"some_value\" }";
-            var transformer = "{ \"sharp\": \"/#not_a_function\", \"parentheses\": \"#xconcat(func/(',#valueof($.arg),'/))\", \"comma\": \"#xconcat(func/(',#valueof($.arg),'/,'other_value'/))\" }";
+		const string input = "{ \"arg\": \"some_value\" }";
+		const string transformer = "{ \"sharp\": \"/#not_a_function\", \"parentheses\": \"#xconcat(func/(',#valueof($.arg),'/))\", \"comma\": \"#xconcat(func/(',#valueof($.arg),'/,'other_value'/))\" }";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.Strict
@@ -235,8 +235,8 @@ namespace JUST.UnitTests
         [Test]
         public void ArrayConcatenation()
         {
-            var input = "{ \"drugs\": [{ \"code\": \"001\", \"display\": \"Drug1\" },{ \"code\": \"002\", \"display\": \"Drug2\" }],\"pa\": [{ \"code\": \"pa1\", \"display\": \"PA1\" },{ \"code\": \"pa2\", \"display\": \"PA2\" }], \"sa\": [{ \"code\": \"sa1\", \"display\": \"SA1\" },{ \"code\": \"sa2\", \"display\": \"SA2\" }]}";
-            var transformer = "{ \"concat\": \"#concat(#valueof($.drugs), #valueof($.pa))\", \"multipleConcat\": \"#concat(#concat(#valueof($.drugs), #valueof($.pa)), #valueof($.sa))\", \"xconcat\": \"#xconcat(#valueof($.drugs), #valueof($.pa), #valueof($.sa))\" }";
+		const string input = "{ \"drugs\": [{ \"code\": \"001\", \"display\": \"Drug1\" },{ \"code\": \"002\", \"display\": \"Drug2\" }],\"pa\": [{ \"code\": \"pa1\", \"display\": \"PA1\" },{ \"code\": \"pa2\", \"display\": \"PA2\" }], \"sa\": [{ \"code\": \"sa1\", \"display\": \"SA1\" },{ \"code\": \"sa2\", \"display\": \"SA2\" }]}";
+		const string transformer = "{ \"concat\": \"#concat(#valueof($.drugs), #valueof($.pa))\", \"multipleConcat\": \"#concat(#concat(#valueof($.drugs), #valueof($.pa)), #valueof($.sa))\", \"xconcat\": \"#xconcat(#valueof($.drugs), #valueof($.pa), #valueof($.sa))\" }";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.Strict
@@ -257,4 +257,3 @@ namespace JUST.UnitTests
             Assert.AreEqual("{\"isNumberTrue1\":true,\"isNumberTrue2\":true,\"isNumberFalse\":false,\"isBooleanTrue\":true,\"isBooleanFalse\":false,\"isStringTrue\":true,\"isStringFalse\":false,\"isArrayTrue\":true,\"isArrayFalse\":false}", result);
         }
     }
-}

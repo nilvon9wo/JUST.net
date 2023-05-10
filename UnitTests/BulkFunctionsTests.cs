@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
 using System;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture, Category("Bulk")]
     public class BulkFunctionsTests
     {
@@ -158,4 +158,3 @@ namespace JUST.UnitTests
             Assert.AreEqual("{\"popup\":{\"menuitem\":[],\"submenuitem\":\"CloseSession()\"},\"id\":{\"file\":\"csv\"},\"value\":{\"Window\":\"popup\"}}", result);
         }
     }
-}

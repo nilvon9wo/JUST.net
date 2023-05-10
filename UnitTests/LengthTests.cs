@@ -2,8 +2,8 @@
 using NUnit.Framework;
 using System;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture, Category("Length")]
     public class LengthTests
     {
@@ -98,4 +98,3 @@ namespace JUST.UnitTests
             Assert.AreEqual($"Error while calling function : #length(#todecimal(1.44)) - Argument not elegible for #length: 1{decimalSeparator}44", result.Message);
         }
     }
-}

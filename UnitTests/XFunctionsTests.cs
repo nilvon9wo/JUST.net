@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture]
     public class XFunctionsTests
     {
@@ -25,4 +25,3 @@ namespace JUST.UnitTests
             Assert.AreEqual("{\"AgeOfParents\":137}", result);
         }
     }
-}

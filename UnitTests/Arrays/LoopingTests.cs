@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 
-namespace JUST.UnitTests.Arrays
-{
+namespace JUST.UnitTests.Arrays;
+
     [TestFixture, Category("Loops")]
     public class LoopingTests
     {
@@ -180,8 +180,8 @@ namespace JUST.UnitTests.Arrays
         [Test]
         public void LoopOverProperties()
         {
-            var input = "{ \"animals\": { \"cat\": { \"legs\": 4, \"sound\": \"meow\" }, \"dog\": { \"legs\": 4, \"sound\": \"woof\" } }, \"spell_numbers\": { \"3\": \"three\", \"2\": \"two\", \"1\": \"one\" } }";
-            var transformer = "{ \"sounds\": { \"#loop($.animals)\": { \"#eval(#currentproperty())\": \"#currentvalueatpath($..sound)\" } }, \"number_index\": { \"#loop($.spell_numbers)\": { \"#eval(#currentindex())\": \"#currentvalueatpath(#concat($.,#currentproperty()))\" } }}";
+		const string input = "{ \"animals\": { \"cat\": { \"legs\": 4, \"sound\": \"meow\" }, \"dog\": { \"legs\": 4, \"sound\": \"woof\" } }, \"spell_numbers\": { \"3\": \"three\", \"2\": \"two\", \"1\": \"one\" } }";
+		const string transformer = "{ \"sounds\": { \"#loop($.animals)\": { \"#eval(#currentproperty())\": \"#currentvalueatpath($..sound)\" } }, \"number_index\": { \"#loop($.spell_numbers)\": { \"#eval(#currentindex())\": \"#currentvalueatpath(#concat($.,#currentproperty()))\" } }}";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.Strict
@@ -194,8 +194,8 @@ namespace JUST.UnitTests.Arrays
         [Test]
         public void EmptyPropertiesLooping()
         {
-            var input = "{ \"animals\": { } }";
-            var transformer = "{ \"sounds\": { \"#loop($.animals)\": { \"#eval(#currentproperty())\": \"#currentvalueatpath($..sound)\" } } }";
+		const string input = "{ \"animals\": { } }";
+		const string transformer = "{ \"sounds\": { \"#loop($.animals)\": { \"#eval(#currentproperty())\": \"#currentvalueatpath($..sound)\" } } }";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.Strict
@@ -208,8 +208,8 @@ namespace JUST.UnitTests.Arrays
         [Test]
         public void NullLooping()
         {
-            var input = "{ \"spell_numbers\": null }";
-            var transformer = "{ \"number_index\": { \"#loop($.spell_numbers)\": { \"#eval(#currentindex())\": \"#currentvalueatpath(#concat($.,#currentproperty()))\" } } }";
+		const string input = "{ \"spell_numbers\": null }";
+		const string transformer = "{ \"number_index\": { \"#loop($.spell_numbers)\": { \"#eval(#currentindex())\": \"#currentvalueatpath(#concat($.,#currentproperty()))\" } } }";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.Strict
@@ -222,8 +222,8 @@ namespace JUST.UnitTests.Arrays
         [Test]
         public void SingleResultFilter()
         {
-            var input = "{\"array\":[{\"resource\":\"Location\",\"number\":\"3\" },{\"resource\":\"Organization\",\"number\":\"10\"}] }";
-            var transformer = "{\"result\":{\"#loop($.array[?(@resource=='Location')])\":{\"existsLocation\":true}}}";
+		const string input = "{\"array\":[{\"resource\":\"Location\",\"number\":\"3\" },{\"resource\":\"Organization\",\"number\":\"10\"}] }";
+		const string transformer = "{\"result\":{\"#loop($.array[?(@resource=='Location')])\":{\"existsLocation\":true}}}";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.Strict
@@ -236,8 +236,8 @@ namespace JUST.UnitTests.Arrays
         [Test]
         public void SingleIndexReference()
         {
-            var input = "{\"array\":[{\"resource\":\"Location\",\"number\":\"3\" },{\"resource\":\"Organization\",\"number\":\"10\"}] }";
-            var transformer = "{\"result\": {\"#loop($.array[1])\": {\"number\":\"#currentvalueatpath($.number)\"} }}";
+		const string input = "{\"array\":[{\"resource\":\"Location\",\"number\":\"3\" },{\"resource\":\"Organization\",\"number\":\"10\"}] }";
+		const string transformer = "{\"result\": {\"#loop($.array[1])\": {\"number\":\"#currentvalueatpath($.number)\"} }}";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.Strict
@@ -316,8 +316,8 @@ namespace JUST.UnitTests.Arrays
         [Test]
         public void TwoLoopsSingleProperty()
         {
-            var input = "{ \"ComponentA\": [ { \"ComponentAId\": 1, \"ComponentAType\": \"T1\", \"ComponentAKind\": \"K1\" } ], \"ComponentB\": [ { \"ComponentBId\": 2, \"ComponentBType\": \"T2\", \"ComponentBKind\": \"K2\" } ]}";
-            var transformer = "{ \"GenericComponent\": { \"#loop($.ComponentA)\": { \"GenericComponentId\": \"#currentvalueatpath($.ComponentAId)\", \"GenericComponentType\": \"#currentvalueatpath($.ComponentAType)\", \"GenericComponentKind\": \"#currentvalueatpath($.ComponentAKind)\" }, \"#loop($.ComponentB)\": { \"GenericComponentId\": \"#currentvalueatpath($.ComponentBId)\", \"GenericComponentType\": \"#currentvalueatpath($.ComponentBType)\", \"GenericComponentKind\": \"#currentvalueatpath($.ComponentBKind)\" } }}";
+		const string input = "{ \"ComponentA\": [ { \"ComponentAId\": 1, \"ComponentAType\": \"T1\", \"ComponentAKind\": \"K1\" } ], \"ComponentB\": [ { \"ComponentBId\": 2, \"ComponentBType\": \"T2\", \"ComponentBKind\": \"K2\" } ]}";
+		const string transformer = "{ \"GenericComponent\": { \"#loop($.ComponentA)\": { \"GenericComponentId\": \"#currentvalueatpath($.ComponentAId)\", \"GenericComponentType\": \"#currentvalueatpath($.ComponentAType)\", \"GenericComponentKind\": \"#currentvalueatpath($.ComponentAKind)\" }, \"#loop($.ComponentB)\": { \"GenericComponentId\": \"#currentvalueatpath($.ComponentBId)\", \"GenericComponentType\": \"#currentvalueatpath($.ComponentBType)\", \"GenericComponentKind\": \"#currentvalueatpath($.ComponentBKind)\" } }}";
 
             var result = new JsonTransformer().Transform(transformer, input);
 
@@ -327,8 +327,8 @@ namespace JUST.UnitTests.Arrays
         [Test]
         public void LoopOverPropertiesInsideLoop()
         {
-            var input = "{ \"Systems\": [ { \"Id\": \"SystemId1\", \"Name\": \"Name of system 1\", \"Components\": [ { \"Id\": \"CompId1\", \"Name\": \"comp 1\", \"Properties\": { \"PropA\": \"valueA\", \"Prop2\": 2.2 } }, { \"Id\": \"CompId2\", \"Name\": \"comp 2\", \"Properties\": { \"PropC\": \"valuec\", \"Prop2\": 222.222 } } ] }, { \"Id\": \"SystemId2\", \"Name\": \"Name of system 2\", \"Components\": [ { \"Id\": \"CompId3\", \"Name\": \"comp 3\", \"Properties\": { \"PropD\": \"valueD\" } }, { \"Id\": \"CompId4\", \"Name\": \"comp 4\", \"Properties\": { \"Prop1\": 11, \"Prop2\": 22.22 } } ] } ]}";
-            var transformer = "{ \"result\": { \"#loop($.Systems,outer)\": { \"#eval(#xconcat(System.,#currentvalueatpath($.Id),.Name))\": \"#currentvalueatpath($.Name)\", \"components\": { \"#loop($.Components,inner)\": { \"#eval(#xconcat(System.,#currentvalueatpath($.Id,outer),.Componets.,#currentvalueatpath($.Id,inner)))\": \"#currentvalueatpath($.Name,inner)\", \"properties\": { \"#loop($.Properties)\": { \"#eval(#xconcat(System.,#currentvalueatpath($.Id,outer),.Components.,#currentvalueatpath($.Id,inner),.,#currentproperty()))\": \"#currentvalueatpath(#xconcat($.,#currentproperty()))\" } } } } } } }";
+		const string input = "{ \"Systems\": [ { \"Id\": \"SystemId1\", \"Name\": \"Name of system 1\", \"Components\": [ { \"Id\": \"CompId1\", \"Name\": \"comp 1\", \"Properties\": { \"PropA\": \"valueA\", \"Prop2\": 2.2 } }, { \"Id\": \"CompId2\", \"Name\": \"comp 2\", \"Properties\": { \"PropC\": \"valuec\", \"Prop2\": 222.222 } } ] }, { \"Id\": \"SystemId2\", \"Name\": \"Name of system 2\", \"Components\": [ { \"Id\": \"CompId3\", \"Name\": \"comp 3\", \"Properties\": { \"PropD\": \"valueD\" } }, { \"Id\": \"CompId4\", \"Name\": \"comp 4\", \"Properties\": { \"Prop1\": 11, \"Prop2\": 22.22 } } ] } ]}";
+		const string transformer = "{ \"result\": { \"#loop($.Systems,outer)\": { \"#eval(#xconcat(System.,#currentvalueatpath($.Id),.Name))\": \"#currentvalueatpath($.Name)\", \"components\": { \"#loop($.Components,inner)\": { \"#eval(#xconcat(System.,#currentvalueatpath($.Id,outer),.Componets.,#currentvalueatpath($.Id,inner)))\": \"#currentvalueatpath($.Name,inner)\", \"properties\": { \"#loop($.Properties)\": { \"#eval(#xconcat(System.,#currentvalueatpath($.Id,outer),.Components.,#currentvalueatpath($.Id,inner),.,#currentproperty()))\": \"#currentvalueatpath(#xconcat($.,#currentproperty()))\" } } } } } } }";
 
             var context = new JUSTContext
             {
@@ -342,8 +342,8 @@ namespace JUST.UnitTests.Arrays
         [Test]
         public void ArrayWithNullValue()
         {
-            var input = "{ \"Systems\": [ ] }";
-            var transformer = "{ \"systemIds\": [ \"#valueof($.Systems[:].Id)\" ] }";
+		const string input = "{ \"Systems\": [ ] }";
+		const string transformer = "{ \"systemIds\": [ \"#valueof($.Systems[:].Id)\" ] }";
 
             var context = new JUSTContext
             {
@@ -354,4 +354,3 @@ namespace JUST.UnitTests.Arrays
             Assert.AreEqual("{\"systemIds\":[]}", result);
         }
     }
-}

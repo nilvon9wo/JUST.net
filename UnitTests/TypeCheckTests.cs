@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture, Category("Type"), Category("TypeCheck")]
     public class TypeCheckTests
     {
@@ -13,7 +13,7 @@ namespace JUST.UnitTests
         public void IsNumber(string typedValue, bool expectedResult)
         {
             var input = $"{{ \"value\": {typedValue} }}";
-            var transformer = "{ \"result\": \"#isnumber(#valueof($.value))\" }";
+		const string transformer = "{ \"result\": \"#isnumber(#valueof($.value))\" }";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.Strict
@@ -31,7 +31,7 @@ namespace JUST.UnitTests
         public void IsBoolean(string typedValue, bool expectedResult)
         {
             var input = $"{{ \"value\": {typedValue} }}";
-            var transformer = "{ \"result\": \"#isboolean(#valueof($.value))\" }";
+		const string transformer = "{ \"result\": \"#isboolean(#valueof($.value))\" }";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.Strict
@@ -49,7 +49,7 @@ namespace JUST.UnitTests
         public void IsString(string typedValue, bool expectedResult)
         {
             var input = $"{{ \"value\": {typedValue} }}";
-            var transformer = "{ \"result\": \"#isstring(#valueof($.value))\" }";
+		const string transformer = "{ \"result\": \"#isstring(#valueof($.value))\" }";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.Strict
@@ -67,7 +67,7 @@ namespace JUST.UnitTests
         public void IsArray(string typedValue, bool expectedResult)
         {
             var input = $"{{ \"value\": {typedValue} }}";
-            var transformer = "{ \"result\": \"#isarray(#valueof($.value))\" }";
+		const string transformer = "{ \"result\": \"#isarray(#valueof($.value))\" }";
             var context = new JUSTContext
             {
                 EvaluationMode = EvaluationMode.Strict
@@ -77,4 +77,3 @@ namespace JUST.UnitTests
             Assert.AreEqual($"{{\"result\":{expectedResult.ToString().ToLower()}}}", result);
         }
     }
-}

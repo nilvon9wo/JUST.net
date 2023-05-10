@@ -2,8 +2,8 @@
 using System;
 using System.Threading.Tasks;
 
-namespace JUST.UnitTests
-{
+namespace JUST.UnitTests;
+
     [TestFixture, Category("SchemaValidator")]
     public class JsonValidatorTests
     {
@@ -33,4 +33,3 @@ namespace JUST.UnitTests
             Assert.AreEqual("PropertyRequired: #/id", result.Message);
         }
     }
-}
